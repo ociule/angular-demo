@@ -1,0 +1,8 @@
+/* app css stylesheet */
+
+div.top-space-fix { margin-top: 40px; }
+
+section#messages {
+    height: 400px;
+    overflow-y: auto;
+}

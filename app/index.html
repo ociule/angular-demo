@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" ng-app="myChatApp">
+<head>
+  <meta charset="utf-8">
+  <title>Angular Chat</title>
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.0/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css"/>
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="brand" href="#">Angular Demo</a>
+       
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+        </ul>
+      </div>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>
+  
+<div class="container-fluid top-space-fix"></div>
+
+<div class="container-fluid"ng-controller="DemoCtrl">
+    <div class="row-fluid" ng-repeat="row in intensity">
+        <div class="span1" data-row="{{$index}}" ng-repeat="column in row" data-column="{{$index}}" style="height: 50px; background: #DDDDDD; margin-bottom:10px;"></div>
+    </div>
+
+</div>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+</body>
+</html>
