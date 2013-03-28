@@ -8,4 +8,12 @@ server.listen(8000);
 
 app.use("/", express.static(__dirname + '/app'));
 
+// assuming io is the Socket.IO server object
+if (process.env.HEROKU) {
+    // See https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
+    io.configure(function () { 
+      io.set("transports", ["xhr-polling"]); 
+      io.set("polling duration", 10); 
+    });
+}
 io.sockets.on('connection', socket);
