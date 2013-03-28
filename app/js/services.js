@@ -11,10 +11,6 @@ services.factory('socket', function ($rootScope) {
   console.log("Initializing socket.io");
   var controllers = [];
   var socket = io.connect();
-  socket.on('init', function (data) {
-    console.log("init2 \""+ data.name +"\" "+data.room);
-  });
-
 
   return {
     on: function (eventName, callback) {
@@ -35,8 +31,5 @@ services.factory('socket', function ($rootScope) {
         });
       })
     },
-    register: function (controller) {
-      controllers.push(controller);
-    }
   };
 });

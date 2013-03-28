@@ -9,41 +9,40 @@ function DemoCtrl($scope, $routeParams, socket) {
   $scope.$on("$destroy", function () { console.log("bye bye "); });
 
   socket.on('init', function (data) {
-    console.log("init \""+ data.name);
-    $scope.name = data.name;
+    console.log("init \""+ data.intensities);
+    $scope.intensities = data.intensities;
   });
 
-  socket.on('send:message', function (message) {
-    if (message.room == $scope.room)
-    $scope.messages.push(message);
+  socket.on('intensity:increase', function (data) {
+    $scope.intensities[data.y][data.x] += 1;
   });
 
 
   // Methods published to the scope
   // ==============================
 
+  // init intensities as empty array
   var width = 12;
   var height = 12;
-  $scope.intensity = Array(height);
+  //$scope.intensities = Array(height);
   for (var i=0; i < height; i++) {
-    $scope.intensity[i] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    //$scope.intensities[i] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   }
 
-  $scope.increaseIntensity = function () {
+  $scope.increaseIntensity = function (y, x) {
+    $scope.intensities[y][x] += 1;
+
     socket.emit('intensity:increase', {
-      message: $scope.message
+      x: x,
+      y: y,
     });
+  }; 
 
-    // add the message to our model locally
-    $scope.messages.push({
-      user: $scope.name,
-      text: $scope.message
-    });
-
-    // clear message box
-    $scope.message = '';
-  };  
-  $scope.message = 'test';
-
+  $scope.intensityToColor = function (intensity) {
+    intensity = 255 - intensity % 255;
+    var stri = intensity.toString(16);
+    if (stri.length == 1) stri = "0" + stri;
+    return "#" + stri + "FFFF";
+  }
 }
 //DemoCtrl.$inject = ['$routeParams', 'socket'];
