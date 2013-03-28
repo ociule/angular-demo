@@ -4,12 +4,14 @@ var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var socket = require('./socket.js');
 
-server.listen(8000);
+var port = process.env.PORT || 8000;
+server.listen(port);
 
 app.use("/", express.static(__dirname + '/app'));
 
 // assuming io is the Socket.IO server object
 if (process.env.HEROKU) {
+    console.log("Configuring socket.io server for Heroku");
     // See https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
     io.configure(function () { 
       io.set("transports", ["xhr-polling"]); 
