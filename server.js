@@ -10,8 +10,8 @@ server.listen(port);
 app.use("/", express.static(__dirname + '/app'));
 
 // assuming io is the Socket.IO server object
-if (process.env.HEROKU) {
-    console.log("Configuring socket.io server for Heroku");
+if (process.env.NO_WEBSOCKETS) {
+    console.log("Configuring socket.io server for Heroku (No true websockets, replace with xhr-longpolling");
     // See https://devcenter.heroku.com/articles/using-socket-io-with-node-js-on-heroku
     io.configure(function () { 
       io.set("transports", ["xhr-polling"]); 
