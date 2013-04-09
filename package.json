@@ -6,6 +6,7 @@
   "author": "Ovidiu Ciule",
   "license": "MIT",
   "dependencies" : {
+    "node": "0.10.1",
     "express": "~3.0.0",
     "socket.io" : "~0.9.13"
   }
